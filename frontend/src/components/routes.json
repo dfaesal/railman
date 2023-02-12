@@ -1,0 +1,11 @@
+{
+    "/api/orders": "/orders",
+    "/api/orders/:id": "/orders/:id",
+    "/api/orders?id=:id": "/orders?id=:id",
+    "/api/restaurants": "/restaurants",
+    "/api/restaurants?pnr=:pnr": "/restaurants?pnr=:pnr",
+    "/api/restaurants?location=:location": "/restaurants?location=:location",
+    "/api/menuItems": "/menuItems",
+    "/api/authentication/login?email=:email": "/login?email=:email",
+    "/api/authentication/register": "/login"
+}

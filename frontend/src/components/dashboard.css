@@ -1,0 +1,66 @@
+.dashboard-container
+{
+    display:grid;
+    grid-row-gap:0.5em;
+    grid-template-areas:
+    "header"
+    "content";
+    grid-gap: 20px;
+    font-size: 1.1rem;
+}
+thead {color:green; background-color:blanchedalmond}
+tbody {color:blue; background-color:rgb(205, 228, 255)}
+tfoot {color:red; background-color:blanchedalmond}
+
+th, td {
+  border: 1px solid black;
+}
+td, th{
+  padding: 5px;
+}
+
+/*.rOrders{
+}*/
+header {
+  grid-area: header;
+  display: block
+}
+article {
+  grid-area: content;
+}
+header nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: nowrap;
+  padding: 30px 0px 15px;
+  border-bottom: 1px solid black;
+}
+header nav ul li{
+  list-style: none;
+  display: inline-block;
+  margin: 10px 30px 10px 0px;
+}
+header nav ul li Link{
+  text-decoration: none;
+  color: black;
+  font-size: 15px;
+}
+header nav button {
+  border: none;
+  outline: none;
+  background: skyblue;
+  color: white;
+  border-radius: 30px;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+article .maincontent{
+  width: 100%;
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+  text-justify: auto;
+  text-align: justify;
+}
