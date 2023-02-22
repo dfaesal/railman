@@ -3,6 +3,7 @@ import { withRouter } from "react-router-dom";
 import NavigationMenuR from './NavigationMenuR.js';
 import OrderList from './OrderList';
 import "./dashboard.css"
+import { getUser } from "./Common.js";
 
 class RestaurantDashboard extends React.Component {
   constructor(props) {
@@ -15,7 +16,8 @@ class RestaurantDashboard extends React.Component {
   componentDidMount() {
     // Fetch active order details from the server
     // and update the state
-    fetch('http://localhost:8000/api/orders')
+    const user = getUser().name;
+    fetch(`http://localhost:8000/api/core/orders/${user}/`)
       .then(response => response.json())
       .then(activeOrders => {
         this.setState({ activeOrders });

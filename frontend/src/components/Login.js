@@ -67,16 +67,13 @@ class Login extends React.Component {
     if (!this.validateForm()) {
       return;
     }
-    //as mock server doesn't support the payload with GET request
-    //sending the login request with query parameter
-    //axios.get(apiBaseUrl + 'login', payload)
-    axios.get(apiBaseUrl + 'login?email=' + payload.email)
+    axios.post(apiBaseUrl + 'login', payload)
       .then(function (response) {
         self.setState({users:response.data});
-        setUserSession(response.data[0].id, response.data[0].name);
-        if (response.status === 200) {
+        if (response.status === 200 && response.data.length > 0) {
           if(payload.role === response.data[0].role)
           {
+            setUserSession(response.data[0].user, response.data[0].name);
             alert("Login successfull");
             if (payload.role === "customer") {
               props.history.push('/customer-dashboard');          
@@ -88,9 +85,9 @@ class Login extends React.Component {
             alert('Role is not correct');
           }
         }
-        else if (response.data.code === 204) {
-          console.log("emailid and pwd  do not match");
-          alert("emailid and pwd  do not match")
+        else if (response.status === 204) {
+          console.log("Wrong login details");
+          alert("Wrong login details")
         }
         else {
           console.log("User does not exists");

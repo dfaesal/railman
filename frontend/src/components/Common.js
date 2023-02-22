@@ -2,7 +2,7 @@
 export const getUser = () => {
     const userStr= [];
     userStr.id = sessionStorage.getItem('id');
-    userStr.name = JSON.parse(sessionStorage.getItem('user'));
+    userStr.name = sessionStorage.getItem('user');
     return userStr;
 }
 

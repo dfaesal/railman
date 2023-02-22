@@ -3,6 +3,7 @@ import { withRouter } from 'react-router-dom';
 import NavigationMenuC from './NavigationMenuC.js'
 import ActiveOrders from './ActiveOrders.js'
 import "./dashboard.css"
+import { getUser } from './Common.js';
 
 class CustomerDashboard extends React.Component {
     constructor(props) {
@@ -13,7 +14,8 @@ class CustomerDashboard extends React.Component {
     }
     componentDidMount() {
       // Make API call to fetch active orders
-      fetch("http://localhost:8000/api/orders")
+      const user = getUser().id;
+      fetch(`http://localhost:8000/api/core/orders/${user}/`)
         .then((res) => res.json())
         .then((data) => {
           this.setState({ activeOrders: data });

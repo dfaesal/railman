@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { getUser } from './Common'
 
 const OrderList = ({ orders }) => {
   return (
@@ -15,9 +16,9 @@ const OrderList = ({ orders }) => {
         {orders.map(order => (
           <tr key={order.id}>
             <td>
-              <Link to={`/active-order/${order.id}`}>{order.id}</Link>
+              <Link to={`/active-order/${getUser().name}/${order.id}`}>{order.id}</Link>
             </td>
-            <td>{order.total}</td>
+            <td>{order.total_cost}</td>
             <td>{order.status}</td>
           </tr>
         ))}

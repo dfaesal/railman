@@ -15,7 +15,7 @@ class Order extends React.Component {
     };
   }
   componentDidMount() {
-    axios.get("http://localhost:8000/api/orders")
+    axios.get("http://localhost:8000/api/core/orders")
       .then((response) => {
         this.setState({ lastIndex: response.data.length + 1 });
       })
@@ -36,13 +36,14 @@ class Order extends React.Component {
     const url = window.location.href.split("/");
     const restaurant = url[url.length - 2];
     const orderItems = this.state.orderItems.map(item => item.name);
+    const customerName = getUser().name;
     const orders = {
       "id": this.state.lastIndex,
-      "customerName": getUser().name,
+      "customerName": customerName,
       "restaurant": restaurant,
       "total": this.state.orderTotal,
       "orderItems": orderItems,
-      "status": "accepted"
+      "status": "pending"
     };
     axios.post("http://localhost:8000/api/orders", orders)
       .then((response) => {

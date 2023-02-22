@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import { getUser } from './Common.js';
 
 class PreviousOrders extends Component {
   state = {
@@ -7,8 +8,9 @@ class PreviousOrders extends Component {
   };
 
   componentDidMount() {
+    const user = getUser().id;
     axios
-      .get('http://localhost:8000/api/orders')
+      .get(`http://localhost:8000/api/core/orders/${user}/`)
       .then(res => {
         this.setState({ orders: res.data });
       })

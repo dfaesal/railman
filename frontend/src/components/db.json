@@ -21,6 +21,28 @@
       "role": "restaurant",
       "pincode": "123456",
       "id": 2
+    },
+    {
+      "name": "abc",
+      "email": "abc@gmail.com",
+      "password": "qwer1234@#",
+      "phone": "1234567890",
+      "address": "addr",
+      "city": "city",
+      "role": "customer",
+      "pincode": "123456",
+      "id": 3
+    },
+    {
+      "name": "abc",
+      "email": "abc@gmail.com",
+      "password": "qwer1234@#",
+      "phone": "1234567890",
+      "address": "addr",
+      "city": "city",
+      "role": "customer",
+      "pincode": "123456",
+      "id": 4
     }
   ],
   "orders": [
@@ -33,7 +55,7 @@
         "Burger"
       ],
       "total": 125,
-      "status": "accepted"
+      "status": "pending"
     },
     {
       "id": 2,
@@ -124,6 +146,42 @@
         "Soup of the Day"
       ],
       "status": "awaiting_delivery"
+    },
+    {
+      "id": 10,
+      "customerName": "abc",
+      "restaurant": "PizzaHut",
+      "total": 49,
+      "orderItems": [
+        "Pepperoni Pizza",
+        "Garlic Knots",
+        "Wings"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": 11,
+      "customerName": "abc",
+      "restaurant": "PizzaHut",
+      "total": 49,
+      "orderItems": [
+        "Pepperoni Pizza",
+        "Garlic Knots",
+        "Wings"
+      ],
+      "status": "delivered"
+    },
+    {
+      "id": 12,
+      "customerName": "name",
+      "restaurant": "McDonald",
+      "total": 42.5,
+      "orderItems": [
+        "Ice Cream",
+        "Big Mac",
+        "French Fries"
+      ],
+      "status": "delivered"
     }
   ],
   "restaurants": [
@@ -260,6 +318,23 @@
         "id": 15,
         "name": "Wings",
         "price": 20
+      }
+    ],
+    "BiryaniHut": [
+      {
+        "id": 16,
+        "name": "Biryani",
+        "price": 430
+      },
+      {
+        "id": 17,
+        "name": "Tandoori Chicken",
+        "price": 300
+      },
+      {
+        "id": 17,
+        "name": "Fried Chicken",
+        "price": 250
       }
     ]
   }

@@ -7,10 +7,10 @@ class OrderDetailsPage extends Component {
     }
 
     componentDidMount() {
-    const { orderId } = this.props.match.params;
+    const { restaurant, orderId } = this.props.match.params;
     //fetch order details based on orderId
     //set order details to state
-    fetch('http://localhost:8000/api/orders/' + orderId)
+    fetch(`http://localhost:8000/api/core/orders/${restaurant}/${orderId}/`)
       .then(response => response.json())
       .then(order => {
         this.setState({ order });
@@ -21,8 +21,9 @@ class OrderDetailsPage extends Component {
     try {
         const { order } = this.state;
         const updatedOrder = {...order, status: 'accepted'};
+        const { restaurant } = this.props.match.params;
         // send a PATCH request to the server to update the order status
-        await axios.patch(`http://localhost:8000/api/orders/${order.id}`, updatedOrder);
+        await axios.patch(`http://localhost:8000/api/core/orders/${restaurant}/${order.id}/`, updatedOrder);
         // update the local state with the updated order details
         this.setState({ order: updatedOrder });
     } catch (error) {
@@ -35,8 +36,9 @@ class OrderDetailsPage extends Component {
     try {
         const { order } = this.state;
         const updatedOrder = {...order, status: 'rejected'};
+        const { restaurant } = this.props.match.params;
         // send a PATCH request to the server to update the order status
-        await axios.patch(`http://localhost:8000/api/orders/${order.id}`, updatedOrder);
+        await axios.patch(`http://localhost:8000/api/core/orders/${restaurant}/${order.id}/`, updatedOrder);
         // update the local state with the updated order details
         this.setState({ order: updatedOrder });
     } catch (error) {
@@ -56,7 +58,7 @@ class OrderDetailsPage extends Component {
         <div>Order ID: {order.id}</div>
         <div>Customer Name: {order.customerName}</div>
         <div>Items: {order.orderItems.join(', ')}</div>
-        <div>Total: {order.total}</div>
+        <div>Total: {order.total_cost}</div>
         { order.status === 'pending' ?
         <div>
           <button onClick={this.handleAcceptOrder}>Accept</button>

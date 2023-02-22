@@ -23,7 +23,7 @@ class ActiveOrders extends React.Component {
                 <td>{order.id}</td>
                 <td>{order.status}</td>
                 <td>{order.restaurant}</td>
-                <td>{order.total}</td>
+                <td>{order.total_cost}</td>
               </tr>
             ))}
           </tbody>
