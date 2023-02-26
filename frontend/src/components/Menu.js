@@ -14,7 +14,8 @@ class Menu extends React.Component {
     }
   
     render() {
-      const menuItems = this.props.items.map((item) => {
+      const { items } = this.props;
+      const menuItems = items.map((item) => {
         return (
           <tr key={item.id}>
             <td>{item.name}</td>

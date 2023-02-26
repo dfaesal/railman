@@ -10,7 +10,7 @@ class CitySerializer(serializers.ModelSerializer):
 class MenuItemSerializer(serializers.ModelSerializer):
     class Meta:
         model = MenuItem
-        fields = ['id', 'name', 'price']
+        fields = ['id', 'name', 'price', 'restaurant']
         
 class CustomerSerializer(serializers.ModelSerializer):
     user = serializers.PrimaryKeyRelatedField(queryset=User.objects.all())
@@ -21,10 +21,10 @@ class CustomerSerializer(serializers.ModelSerializer):
 class OrderSerializer(serializers.ModelSerializer):
     customerName = serializers.SerializerMethodField()
     orderItems = serializers.SerializerMethodField()
-    restaurant = serializers.CharField(source='restaurant.__str__', read_only=True)
+    restaurantName = serializers.CharField(source='restaurant.__str__', read_only=True)
     class Meta:
         model = Order
-        fields = ['id', 'user', 'restaurant', 'orderItems', 'total_cost', 'timestamp', 'status', 'customerName']
+        fields = ('id', 'user', 'restaurant', 'items','orderItems', 'total_cost', 'timestamp', 'status', 'customerName', 'restaurantName')
 
     def get_customerName(self, obj):
         return obj.user.username
@@ -34,8 +34,9 @@ class OrderSerializer(serializers.ModelSerializer):
         return list(items_names)
 
 class RestaurantSerializer(serializers.ModelSerializer):
+    city = serializers.CharField(source='city.__str__', read_only=True)
     class Meta:
         model = Restaurant
-        fields = ['id', 'name', 'phone', 'email', 'address', 'pincode', 'city', 'rating']
+        fields = ['id', 'user', 'name', 'phone', 'email', 'address', 'pincode', 'password', 'city', 'role', 'rating']
 
  

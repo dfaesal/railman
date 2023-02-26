@@ -21,11 +21,6 @@ class CustomerDashboard extends React.Component {
           this.setState({ activeOrders: data });
         });
     }
-    handleOrderPlacement = (order) => {
-      this.setState((state) => ({
-        activeOrders: [...state.activeOrders, order],
-      }));
-    };
     render() {
       const { activeOrders } = this.state;
       return (

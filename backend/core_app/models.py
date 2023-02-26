@@ -15,19 +15,22 @@ class Customer(models.Model):
     password = models.CharField(max_length=200,blank=False, default='')
     phone = models.IntegerField(blank=True)
     address = models.CharField(max_length=200,blank=True, default='')
-    city = models.ForeignKey(City, on_delete=models.SET_NULL, null=True)
+    city = models.ForeignKey(City, on_delete=models.CASCADE, null=True)
     role = models.CharField(max_length=10, blank=True)
     pincode = models.IntegerField(blank=True)
 
 class Restaurant(models.Model):
     def __str__(self):
         return self.name
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
     name = models.CharField(max_length=70, blank=True, default='')
+    email = models.CharField(max_length=210,blank=False, default='')
+    password = models.CharField(max_length=200,blank=False, default='')    
     phone = models.IntegerField(blank=True)
-    email = models.CharField(max_length=200,blank=False, default='')
     address = models.CharField(max_length=200,blank=True, default='')
-    city = models.ForeignKey(City, on_delete=models.SET_NULL, null=True)
+    city = models.ForeignKey(City, on_delete=models.CASCADE, null=True)
     pincode = models.IntegerField(blank=True)
+    role = models.CharField(max_length=10, blank=True)
     rating = models.DecimalField(max_digits=5, decimal_places=2, blank=True, null=True)
 
 class MenuItem(models.Model):
@@ -60,8 +63,8 @@ class Order(models.Model):
     
 class PnrDetail(models.Model):
     def __str__(self):
-        return self.pnr
-    customer = models.ForeignKey(Customer, on_delete=models.SET_NULL, null=True)
+        return f'{str(self.pnr)}'
+    customer = models.ForeignKey(Customer, on_delete=models.CASCADE, null=True)
     pnr = models.IntegerField(blank=True)
     start_location = models.CharField(max_length=20, default='')
     end_location = models.CharField(max_length=20, default='')

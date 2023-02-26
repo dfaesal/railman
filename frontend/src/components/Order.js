@@ -9,24 +9,25 @@ class Order extends React.Component {
     super(props);
 
     this.state = {
+      items: [],
       orderItems: [],
-      orderTotal: 0,
-      lastIndex: 0
     };
   }
   componentDidMount() {
-    axios.get("http://localhost:8000/api/core/orders")
-      .then((response) => {
-        this.setState({ lastIndex: response.data.length + 1 });
+    const url = window.location.href.split("/");
+    const restaurant = url[url.length - 2];
+    axios
+      .get(`http://localhost:8000/api/core/${restaurant}/menuItems/`)
+      .then(res => {
+        this.setState({ items: res.data });
       })
-      .catch((error) => {
-        console.log(error);
-    });
+      .catch(error => {
+        console.error(error);
+      });
   }
   handleItemSelection = (item) => {
     this.setState(prevState => ({
       orderItems: [...prevState.orderItems, item],
-      orderTotal: prevState.orderTotal + item.price,
     }));
   }
 
@@ -36,16 +37,14 @@ class Order extends React.Component {
     const url = window.location.href.split("/");
     const restaurant = url[url.length - 2];
     const orderItems = this.state.orderItems.map(item => item.name);
-    const customerName = getUser().name;
+    const user = getUser().id;
     const orders = {
-      "id": this.state.lastIndex,
-      "customerName": customerName,
+      "user": user,
       "restaurant": restaurant,
-      "total": this.state.orderTotal,
       "orderItems": orderItems,
       "status": "pending"
     };
-    axios.post("http://localhost:8000/api/orders", orders)
+    axios.post("http://localhost:8000/api/core/orders/", orders)
       .then((response) => {
         console.log(response)
       })
@@ -60,7 +59,7 @@ class Order extends React.Component {
     return (
       <div>
         <h2>Order</h2>
-        <Menu items={this.props.items} handleItemSelection={this.handleItemSelection} />
+        <Menu items={this.state.items} handleItemSelection={this.handleItemSelection} />
         <Payment handlePayment={this.handlePayment} />
       </div>
     );

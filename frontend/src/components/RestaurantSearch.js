@@ -39,7 +39,7 @@ class RestaurantSearch extends React.Component {
       // make API call to retrieve list of restaurants based on location or PNR
       if( location )
       {
-        axios.get(`http://localhost:8000/api/restaurants?location=${location}`)
+        axios.get(`http://localhost:8000/api/core/restaurants/?location=${location}`)
         .then((response) => {
           this.setState({ restaurants: response.data });
           if(response.data.length === 0){
@@ -50,7 +50,7 @@ class RestaurantSearch extends React.Component {
           console.log(error);
         });
       } else {
-        axios.get(`http://localhost:8000/api/restaurants?pnr=${pnr}`)
+        axios.get(`http://localhost:8000/api/core/restaurants/?pnr=${pnr}`)
         .then((response) => {
           if(response.data.length === 0){
             alert('PNR not found');
