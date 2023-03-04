@@ -1,4 +1,4 @@
-# RailMan React Frontend
+# RailMan App
 <p>&nbsp;</p>
     <h2>
         Order Food in Trains Online
@@ -17,35 +17,45 @@
 <!-- tocstop -->
 ## Pre requisites
 
-Install JSON Server 
+Create backend DB
 
 ```bash
- cd "railman-app\"
+cd "railman\"
+createdb -U postgres -h localhost -p 5432 railman
 ```
 
-```
-npm install -g json-server
-```
-
-Start JSON Server
+Restore data to railman DB
 
 ```bash
- json-server --watch .\src\components\db.json --port 8000 --routes .\src\components\routes.json
+pg_restore -U postgres -h localhost -p 5432 -F c -v -d railman backend\railmanDb_backup.dump
 ```
-
-[For More Info on JSON Server](https://github.com/typicode/json-server)
 
 ## Getting started
 
-Install railman app
+### Install railman frontend
 
 ```bash
-cd "railmam-app\"
+cd "frontend"
 npm install
 ```
 
-Start the Railman App
+Start the Railman React frontend
 
 ```bash
 npm start
+```
+
+### Intall railman backend
+
+```bash
+cd "backend"
+python -m venv env
+env\Scripts\activate
+pip install -r requirements.txt
+```
+
+Start the Railman Django backend
+
+```bash
+python manage.py runserver
 ```
